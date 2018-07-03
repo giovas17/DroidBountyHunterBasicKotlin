@@ -89,6 +89,12 @@ class Home : AppCompatActivity() {
             // Show 3 total pages.
             return 3
         }
+
+        override fun getPageTitle(position: Int) = when (position) {
+            0 -> getString(R.string.titulo_fugitivos).toUpperCase()
+            1 -> getString(R.string.titulo_capturados).toUpperCase()
+            else -> getString(R.string.titulo_acerca_de).toUpperCase()
+        }
     }
 
     /**
