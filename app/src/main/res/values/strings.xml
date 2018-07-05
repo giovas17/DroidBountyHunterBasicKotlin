@@ -18,4 +18,6 @@
     <string name="etiqueta_año">2018</string>
     <string name="etiqueta_empresa">D.W. Training S.C.</string>
     <string name="etiqueta_mensaje">Mensaje…</string>
+    <string name="titulo_activity_agregar">Nuevo fugitivo</string>
+    <string name="titulo_activity_detalle">Detalle Fugitivo</string>
 </resources>
