@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.fragment_acerca_de.*
 
 /**
  * @author Giovani Gonzalez
- * Created giovani on 7/5/18
+ * Created darkgeat on 7/5/18
  */
 class AcercaDeFragment : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -20,7 +20,7 @@ class AcercaDeFragment : Fragment(){
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        var rating = "0.0"
+        var rating = "0.0" // Variable para lectura del rating guardado en Properties
         if (System.getProperty("rating") != null){
             rating = System.getProperty("rating")
         }

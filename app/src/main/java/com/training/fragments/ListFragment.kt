@@ -16,9 +16,11 @@ import kotlinx.android.synthetic.main.fragment_list.*
  * @author Giovani Gonzalez
  * Created giovani on 7/5/18
  */
+
 const val SECTION_NUMBER : String = "section_number"
 
 class ListFragment : Fragment() {
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Se hace referencia al Fragment generado por XML en los Layouts y
         // se instancia en una View...
@@ -44,4 +46,5 @@ class ListFragment : Fragment() {
             startActivity(intent)
         }
     }
+
 }
