@@ -13,6 +13,7 @@ import android.view.MenuItem
 import com.training.fragments.AcercaDeFragment
 import com.training.fragments.ListFragment
 import com.training.fragments.SECTION_NUMBER
+import com.training.models.Fugitivo
 import kotlinx.android.synthetic.main.activity_home.*
 
 class Home : AppCompatActivity() {
@@ -59,6 +60,15 @@ class Home : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    fun actualizarListas(index: Int){
+        container.adapter = mSectionsPagerAdapter
+        container.currentItem = index
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        actualizarListas(resultCode)
+    }
 
     /**
      * A [FragmentPagerAdapter] that returns a fragment corresponding to

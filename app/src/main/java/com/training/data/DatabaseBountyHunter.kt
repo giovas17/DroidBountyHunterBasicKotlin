@@ -66,7 +66,6 @@ class DatabaseBountyHunter(val context: Context){
     fun querySQL(sql: String, selectionArgs: Array<String>): Cursor{
         open()
         val regreso = database!!.rawQuery(sql,selectionArgs)
-        close()
         return regreso
     }
 
@@ -94,8 +93,8 @@ class DatabaseBountyHunter(val context: Context){
         close()
     }
 
-    fun obtenerFugitivos(status: Int) : Array<Fugitivo>? {
-        var fugitivos: Array<Fugitivo>? = null
+    fun obtenerFugitivos(status: Int) : Array<Fugitivo> {
+        var fugitivos: Array<Fugitivo> = arrayOf()
         val dataCursor = querySQL("SELECT * FROM " + TABLE_NAME_FUGITIVOS + " WHERE " +
                 COLUMN_NAME_STATUS + "= ? ORDER BY " + COLUMN_NAME_NAME, arrayOf(status.toString()))
         if (dataCursor.count > 0) {
