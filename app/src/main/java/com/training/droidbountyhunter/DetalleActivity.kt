@@ -1,7 +1,12 @@
 package com.training.droidbountyhunter
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE
 import android.provider.Settings
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -12,8 +17,10 @@ import com.training.data.DatabaseBountyHunter
 import com.training.models.Fugitivo
 import com.training.network.NetworkServices
 import com.training.network.onTaskListener
+import com.training.utils.PictureTools
 import kotlinx.android.synthetic.main.activity_detalle.*
 import org.json.JSONObject
+
 
 /**
  * @author Giovani Gonzalez
@@ -24,6 +31,8 @@ class DetalleActivity : AppCompatActivity(){
     private var UDID: String? = ""
     var fugitivo: Fugitivo? = null
     var database: DatabaseBountyHunter? = null
+    private var direccionImagen: Uri? = null
+    private val REQUEST_CODE_PHOTO_IMAGE = 1787
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -41,12 +50,22 @@ class DetalleActivity : AppCompatActivity(){
         }else{
             etiquetaMensaje.text = "Atrapado!!!"
             botonCapturar.visibility = GONE
+            if (fugitivo!!.photo.isNotEmpty()){
+                val bitmap = PictureTools.decodeSampledBitmapFromUri(fugitivo!!.photo,200,200)
+                pictureFugitive.setImageBitmap(bitmap)
+            }
         }
     }
 
     fun capturarFugitivoPresionado(view: View){
         database = DatabaseBountyHunter(this)
         fugitivo!!.status = 1
+        if (fugitivo!!.photo.isEmpty()){
+            Toast.makeText(this,
+                    "Es necesario tomar la foto antes de capturar al fugitivo",
+                    Toast.LENGTH_LONG).show()
+            return
+        }
         database!!.actualizarFugitivo(fugitivo!!)
         val services = NetworkServices(object: onTaskListener{
             override fun tareaCompletada(respuesta: String) {
@@ -83,5 +102,30 @@ class DetalleActivity : AppCompatActivity(){
                     setResult(fugitivo!!.status)
                     finish()
                 }.show()
+    }
+
+    fun OnFotoClick(view: View){
+        if (PictureTools.permissionReadMemmory(this)){
+            obtenFotoDeCamara()
+        }
+    }
+
+    private fun obtenFotoDeCamara() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        direccionImagen = PictureTools.getOutputMediaFileUri(this, MEDIA_TYPE_IMAGE)
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, direccionImagen)
+        startActivityForResult(intent, REQUEST_CODE_PHOTO_IMAGE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_PHOTO_IMAGE) {
+            if (resultCode == Activity.RESULT_OK) {
+                fugitivo!!.photo = PictureTools.currentPhotoPath
+                val bitmap = PictureTools
+                        .decodeSampledBitmapFromUri(PictureTools.currentPhotoPath, 200, 200)
+                pictureFugitive.setImageBitmap(bitmap)
+            }
+        }
     }
 }
