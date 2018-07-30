@@ -2,7 +2,6 @@ package com.training.droidbountyhunter
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -13,7 +12,6 @@ import android.view.MenuItem
 import com.training.fragments.AcercaDeFragment
 import com.training.fragments.ListFragment
 import com.training.fragments.SECTION_NUMBER
-import com.training.models.Fugitivo
 import kotlinx.android.synthetic.main.activity_home.*
 
 class Home : AppCompatActivity() {

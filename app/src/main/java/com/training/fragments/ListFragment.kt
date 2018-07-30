@@ -9,10 +9,14 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import com.training.data.DatabaseBountyHunter
 import com.training.droidbountyhunter.DetalleActivity
 import com.training.droidbountyhunter.R
 import com.training.models.Fugitivo
+import com.training.network.JSONUtils
+import com.training.network.NetworkServices
+import com.training.network.onTaskListener
 import kotlinx.android.synthetic.main.fragment_list.*
 
 /**
@@ -50,6 +54,23 @@ class ListFragment : Fragment() {
             val adaptador = ArrayAdapter<String>(context,R.layout.item_fugitivo_list,values)
             listView!!.adapter = adaptador
             listView.tag = fugitivos
+        }else{ // La base de datos se encuentra vacía
+            if (modo == 0){
+                val services = NetworkServices(object: onTaskListener{
+                    override fun tareaCompletada(respuesta: String) {
+                        JSONUtils.parsearFugitivos(respuesta, context!!)
+                        actualizarDatos(listView, modo)
+                    }
+
+                    override fun tareaConError(codigo: Int, mensaje: String, error: String) {
+                        Toast.makeText(
+                                context,
+                                "Ocurrio un problema con el WebService!!! --- Código de error: $codigo \nMensaje: $mensaje",
+                                Toast.LENGTH_LONG).show()
+                    }
+                })
+                services.execute("Fugitivos")
+            }
         }
     }
 
