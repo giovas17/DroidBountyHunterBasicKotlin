@@ -29,6 +29,8 @@ import org.json.JSONObject
 import android.location.Criteria
 import android.os.Build
 import android.support.v4.app.ActivityCompat
+import android.view.Menu
+import android.view.MenuItem
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -230,6 +232,21 @@ class DetalleActivity : AppCompatActivity(), LocationListener{
         val intent = Intent(this, MapActivity::class.java)
         intent.putExtra("fugitivo", fugitivo)
         startActivity(intent)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_detalle, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item!!.itemId){
+            R.id.menu_capturar -> capturarFugitivoPresionado(botonCapturar)
+            R.id.menu_delete -> eliminarFugitivoPresionado(botonEliminar)
+            R.id.menu_tomar_foto -> OnFotoClick(botonTomarFoto)
+            R.id.menu_mapa -> OnMapClick(botonMapa)
+        }
+        return true
     }
 
 }

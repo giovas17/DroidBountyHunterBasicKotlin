@@ -18,7 +18,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_below="@id/etiquetaMensaje"
-        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:src="@android:drawable/ic_menu_gallery"/>
 
     <Button
@@ -32,7 +32,8 @@
         android:layout_marginTop="20dp"
         android:layout_below="@+id/pictureFugitive"
         android:layout_centerHorizontal="true"
-        android:onClick="capturarFugitivoPresionado"/>
+        android:onClick="capturarFugitivoPresionado"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/botonEliminar"
@@ -44,7 +45,8 @@
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
         android:layout_below="@+id/botonCapturar"
         android:layout_centerHorizontal="true"
-        android:onClick="eliminarFugitivoPresionado"/>
+        android:onClick="eliminarFugitivoPresionado"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/botonTomarFoto"
@@ -54,7 +56,8 @@
         android:layout_below="@+id/botonEliminar"
         android:layout_centerHorizontal="true"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-        android:onClick="OnFotoClick"/>
+        android:onClick="OnFotoClick"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/botonMapa"
@@ -64,6 +67,7 @@
         android:layout_below="@+id/botonTomarFoto"
         android:layout_centerHorizontal="true"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-        android:onClick="OnMapClick"/>
+        android:onClick="OnMapClick"
+        android:visibility="gone"/>
 
 </RelativeLayout>

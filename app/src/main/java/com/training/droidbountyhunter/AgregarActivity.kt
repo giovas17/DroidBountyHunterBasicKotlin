@@ -3,6 +3,8 @@ package com.training.droidbountyhunter
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.training.data.DatabaseBountyHunter
 import com.training.models.Fugitivo
@@ -32,6 +34,18 @@ class AgregarActivity : AppCompatActivity(){
                     .setMessage("Favor de capturar el nombre del fugitivo.")
                     .show()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_agregar, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item!!.itemId == R.id.menu_agregar){
+            guardarFugitivoPresionado(item as View)
+        }
+        return true
     }
 }
 
