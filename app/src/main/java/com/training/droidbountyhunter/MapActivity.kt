@@ -24,8 +24,8 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback{
     private var googleMap: GoogleMap? = null
     private var fugitivo: Fugitivo? = null
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mapa)
 
         fugitivo = intent.getParcelableExtra("fugitivo")
