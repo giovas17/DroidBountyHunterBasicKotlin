@@ -9,14 +9,16 @@ import android.os.Parcelable
  */
 
 data class Fugitivo @JvmOverloads constructor(val id: Int, var name: String, var status: Int,
-                                              var photo: String = "", var latitude: Double = 0.0, var longitude: Double = 0.0) : Parcelable {
+                                              var photo: String = "", var latitude: Double = 0.0,
+                                              var longitude: Double = 0.0, var date: String = "") : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
             parcel.readString(),
             parcel.readInt(),
             parcel.readString(),
             parcel.readDouble(),
-            parcel.readDouble())
+            parcel.readDouble(),
+            parcel.readString())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
@@ -25,6 +27,7 @@ data class Fugitivo @JvmOverloads constructor(val id: Int, var name: String, var
         parcel.writeString(photo)
         parcel.writeDouble(latitude)
         parcel.writeDouble(longitude)
+        parcel.writeString(date)
     }
 
     override fun describeContents() = 0

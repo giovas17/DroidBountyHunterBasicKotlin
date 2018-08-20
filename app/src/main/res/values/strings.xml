@@ -23,4 +23,5 @@
     <string name="boton_foto">Tomar Foto</string>
     <string name="google_maps_key">AIzaSyCUU9Jv6wrO6VkwJ6_g3W4ljZ-iTKXXAM4</string>
     <string name="boton_mapa">Ver Mapa</string>
+    <string name="content_fugitivo">Imagen del fugitivo</string>
 </resources>

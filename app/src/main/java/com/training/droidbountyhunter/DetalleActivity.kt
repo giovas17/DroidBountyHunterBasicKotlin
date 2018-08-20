@@ -29,6 +29,8 @@ import org.json.JSONObject
 import android.location.Criteria
 import android.os.Build
 import android.support.v4.app.ActivityCompat
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -78,6 +80,7 @@ class DetalleActivity : AppCompatActivity(), LocationListener{
                     Toast.LENGTH_LONG).show()
             return
         }
+        fugitivo!!.date = SimpleDateFormat("dd/MM/yyyy").format(Date())
         database!!.actualizarFugitivo(fugitivo!!)
         val services = NetworkServices(object: onTaskListener{
             override fun tareaCompletada(respuesta: String) {

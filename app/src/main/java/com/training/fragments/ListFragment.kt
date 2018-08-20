@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
+import com.training.adapters.FugitivoAdapter
 import com.training.data.DatabaseBountyHunter
 import com.training.droidbountyhunter.DetalleActivity
 import com.training.droidbountyhunter.R
@@ -51,7 +52,7 @@ class ListFragment : Fragment() {
         if (fugitivos.isNotEmpty()){
             val values = ArrayList<String>()
             fugitivos.mapTo(values){ it.name }
-            val adaptador = ArrayAdapter<String>(context,R.layout.item_fugitivo_list,values)
+            val adaptador = FugitivoAdapter(context!!,fugitivos)
             listView!!.adapter = adaptador
             listView.tag = fugitivos
         }else{ // La base de datos se encuentra vacía
