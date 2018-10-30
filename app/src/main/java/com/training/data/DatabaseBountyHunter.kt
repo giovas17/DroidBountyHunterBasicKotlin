@@ -81,6 +81,12 @@ class DatabaseBountyHunter(val context: Context){
         close()
     }
 
+    fun borrarFugitivo(id: String){
+        open()
+        database!!.delete(TABLE_NAME_FUGITIVOS, COLUMN_NAME_ID + "=?", arrayOf(id))
+        close()
+    }
+
     fun actualizarFugitivo(fugitivo: Fugitivo){
         open()
         val values = ContentValues()
@@ -90,6 +96,12 @@ class DatabaseBountyHunter(val context: Context){
         values.put(COLUMN_NAME_LATITUDE, fugitivo.latitude)
         values.put(COLUMN_NAME_LONGITUDE, fugitivo.longitude)
         database!!.update(TABLE_NAME_FUGITIVOS,values, COLUMN_NAME_ID + "=?",arrayOf(fugitivo.id.toString()))
+        close()
+    }
+
+    fun actualizarFugitivo(values: ContentValues, id: String){
+        open()
+        database!!.update(TABLE_NAME_FUGITIVOS,values, COLUMN_NAME_ID + "=?",arrayOf(id))
         close()
     }
 
